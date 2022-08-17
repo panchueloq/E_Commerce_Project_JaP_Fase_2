@@ -1,15 +1,34 @@
-const email = document.getElementById('email');
-const password = document.getElementById('password');
 const login = document.getElementById('login_btn');
-const google = document.getElementById('google_btn');
+const inputs = document.querySelectorAll('form input');
+var valid = true;
 
-login.addEventListener('click', ()=>{
+login.addEventListener('click', (event)=>{
     event.preventDefault();
-    if (email.value == '' || password.value == ''){
-        alert('Por favor, completar los campos de ingreso');
-    }
-    else {
-        window.location.href = './home.html';
-    }
+    valid = true;
+    cleanErrors(inputs);
+    verifyEmpty(inputs);
+    signIn(valid);
 })
 
+function verifyEmpty(array){
+    array.forEach(element => {
+        if (element.value == '' || element.value == null){
+            let errormsg = document.querySelector(`#${element.id}+p`);
+            errormsg.innerHTML = `Por favor, ingrese su ${element.name}`;
+            valid = false;
+        }
+    });
+}
+
+function signIn(valid){
+    if (valid){
+        window.location.href = './home.html';
+    }
+}
+
+function cleanErrors(array){
+    array.forEach(element => {
+        let errormsg = document.querySelector(`#${element.id}+p`);
+        errormsg.innerHTML = '';
+    });
+}
