@@ -82,6 +82,16 @@
   </footer>
 
   <script src="js/login.js"></script>
+
+  <!-- Saving email to localStorage when loggin in with google -->
+  <script>
+    function onSignIn(){
+      const googleUser = gapi.auth2.getAuthInstance().currentUser.get();
+      const profile = googleUser.getBasicProfile();
+      localStorage.setItem('personal_email', JSON.stringify(profile.getEmail()));
+    }
+  </script>
+
 </body>
 
 </html>
