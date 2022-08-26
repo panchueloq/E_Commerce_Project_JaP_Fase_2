@@ -1,9 +1,10 @@
 // Arrays where categories are loaded
 let cat = [];
+let cats = [];
 
 // Asynchronous loading of data
 async function getData() {
-    let answer = await fetch('https://japceibal.github.io/emercado-api/cats_products/101.json');
+    let answer = await fetch(`https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem('catID')}.json`);
     if (answer.ok) {
         information = await answer.json();
         return information;
@@ -15,8 +16,9 @@ async function getData() {
 
 // Asynchronous storing of loaded data & function excecution
 document.addEventListener('DOMContentLoaded', async function() {
-    let cats = await getData();
+    cats = await getData();
     cat = cats.products;
+    document.querySelector('.lead').innerHTML = `Verás aquí todos los productos de la categoría ${cats.catName}`
     showProducts(cat);
 })
 
@@ -45,3 +47,5 @@ function showProducts(array) {
         
     });
 }
+
+
