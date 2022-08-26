@@ -41,6 +41,7 @@ let getJSONData = function(url){
 }
 
 
+var personal_email = localStorage.getItem('personal_email')
 
 document.getElementById('the_nav_bar').innerHTML = `
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
@@ -61,7 +62,7 @@ document.getElementById('the_nav_bar').innerHTML = `
           <a class="nav-link" href="sell.html">Vender</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="my-profile.html">mi_email@mail.com</a>
+          <a class="nav-link" href="my-profile.html">${personal_email}</a>
         </li>
       </ul>
     </div>
