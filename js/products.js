@@ -34,14 +34,15 @@ function showProducts(array) {
                 <div class="col">
                     <div class="d-flex w-100 justify-content-between">
                         <div class="p-1">
-                        <h4>${element.name} - ${element.currency} ${element.cost}</h4> 
-                        <p>${element.description}</p> 
+                            <h4>${element.name} - ${element.currency} ${element.cost}</h4> 
+                            <p>${element.description}</p> 
                         </div>
                         <small class="text-muted p-1">${element.soldCount} vendidos</small> 
                     </div>
                 </div>
             </div>
         </div>
+        <div class="mb-2"></div>
         `
         document.getElementById('cat-list-container').innerHTML += htmlContentToAppend;
         
