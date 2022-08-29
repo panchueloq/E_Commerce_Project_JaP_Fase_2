@@ -152,7 +152,6 @@ const searchInput = document.querySelector('[data-search]')
 
 searchInput.addEventListener('input', e => {
     product_search = e.target.value.toLowerCase();
-    showCategoriesList();
-    console.log(product_search);
+    showCategoriesList()
 })
 
