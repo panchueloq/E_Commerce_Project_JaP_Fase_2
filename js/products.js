@@ -89,8 +89,9 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(`https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem('catID')}.json`).then(function(resultObj){
         if (resultObj.status === "ok"){
-            currentCategoriesArray = resultObj.data
-            currentCategoriesArray = currentCategoriesArray.products
+            cats = resultObj.data
+            currentCategoriesArray = cats.products
+            document.querySelector('.lead').innerHTML = `Verás aquí todos los productos de la categoría ${cats.catName}`
             showCategoriesList()
             //sortAndShowCategories(ORDER_ASC_BY_PRICE, resultObj.data);
         }
@@ -104,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         sortAndShowCategories(ORDER_DESC_BY_PRICE);
     });
 
-    document.getElementById("sortByCount").addEventListener("click", function(){
+    document.getElementById("sortByRelev").addEventListener("click", function(){
         sortAndShowCategories(ORDER_BY_PROD_RELEV);
     });
 
