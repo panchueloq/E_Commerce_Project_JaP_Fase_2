@@ -43,7 +43,8 @@ function showCategoriesList(){
         let element = currentCategoriesArray[i];
 
         if (((minPrice == undefined) || (minPrice != undefined && parseInt(element.cost) >= minPrice)) &&
-            ((maxPrice == undefined) || (maxPrice != undefined && parseInt(element.cost) <= maxPrice))){
+            ((maxPrice == undefined) || (maxPrice != undefined && parseInt(element.cost) <= maxPrice)) &&
+            (element.name.toLowerCase().includes(product_search))){
 
             htmlContentToAppend += `
             <div class="list-group-item list-group-item-action">
@@ -142,3 +143,16 @@ document.addEventListener("DOMContentLoaded", function(e){
         showCategoriesList();
     });
 });
+
+
+// Creating the variable for the search bar
+let product_search = [];
+
+const searchInput = document.querySelector('[data-search]')
+
+searchInput.addEventListener('input', e => {
+    product_search = e.target.value.toLowerCase();
+    showCategoriesList();
+    console.log(product_search);
+})
+
