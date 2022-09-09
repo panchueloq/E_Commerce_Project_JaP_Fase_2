@@ -47,7 +47,7 @@ function showCategoriesList(){
             (element.name.toLowerCase().includes(product_search))){
 
             htmlContentToAppend += `
-            <div class="list-group-item list-group-item-action">
+            <div class="list-group-item list-group-item-action" onclick="guardarIdentificador(${element.id})">
                 <div class="row">
                     <div class="col-md-3">
                         <img src="${element.image}" alt="product image" class="img-thumbnail">
@@ -155,3 +155,9 @@ searchInput.addEventListener('input', e => {
     showCategoriesList()
 })
 
+
+// Function to save product identifier
+function guardarIdentificador(id){
+    localStorage.setItem('id', id);
+    window.location = "product-info.html";
+}
