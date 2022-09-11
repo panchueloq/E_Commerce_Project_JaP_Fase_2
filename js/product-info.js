@@ -8,11 +8,23 @@ async function getData(){
     }
 }
 
+// async function to get comment data
+async function getComments(){
+    let link = `https://japceibal.github.io/emercado-api/products_comments/${localStorage.getItem('id')}.json`
+    let respuesta = await fetch(link);
+    if (respuesta.ok){
+        let comment_data = await respuesta.json();
+        return comment_data;
+    }
+}
+
 // async function to work with data
 document.addEventListener('DOMContentLoaded', async function(){
     let data = await getData();
+    let comment_data = await getComments();
     add_to_html(data);
     fillImages(data);
+    fillReviews(comment_data);
 })
 
 // function to add html code
@@ -45,14 +57,14 @@ function add_to_html(data){
     </div>
     <div class="col-md-6">
       <h4>Imágenes</h4>
-        <div class="row" id="imagenes">
-        </div>
+        <div class="row" id="imagenes"></div>
     </div>
     </div>
     <hr>
     <div class="row m-0 px-4">
     <div class="col">
-      <h4>COMENTARIOS</h4>
+      <h4>Comentarios</h4>
+      <div class="row" id="comentarios"></div>
     </div>
     </div>
     `
@@ -72,3 +84,13 @@ function fillImages(data){
     imagenes.innerHTML = image_content;
 }
 
+// function to add reviews
+function fillReviews(comment_data){
+    let reviews = document.getElementById("comentarios");
+    let review_content = '';
+    comment_data.forEach(review => {
+        review_content +=`
+        Hola!`
+    });
+    reviews.innerHTML = review_content;
+}
