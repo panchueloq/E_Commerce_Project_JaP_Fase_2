@@ -63,7 +63,7 @@ function add_to_html(data){
     <hr>
     <div class="row m-0 px-4">
     <div class="col">
-      <h4>Comentarios</h4>
+      <h4 class="mb-4">Comentarios</h4>
       <div class="row" id="comentarios"></div>
     </div>
     </div>
@@ -90,7 +90,30 @@ function fillReviews(comment_data){
     let review_content = '';
     comment_data.forEach(review => {
         review_content +=`
-        Hola!`
+        <div class="card mb-2 shadow">
+        <div class="row justify-content-between">
+          <div class="col-md-6">
+            <p><b>${review.user}</b> - ${review.dateTime}</p>
+          </div>
+          <div class="col-md-4 text-md-end mb-3">
+            <div class="star">
+                <span class="rating-item fa fa-star"></span>
+                <span class="rating-item fa fa-star"></span>
+                <span class="rating-item fa fa-star"></span>
+                <span class="rating-item fa fa-star"></span>
+                <span class="rating-item fa fa-star"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <p>${review.description}</p>
+        </div>
+        </div>`
     });
     reviews.innerHTML = review_content;
 }
+
+// function to color stars based on rating
+// function colorStars()
+
+
