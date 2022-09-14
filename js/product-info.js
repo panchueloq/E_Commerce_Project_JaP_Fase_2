@@ -67,6 +67,26 @@ function add_to_html(data){
       <div class="row" id="comentarios"></div>
     </div>
     </div>
+    <hr>
+    <div class="row m-0 px-4">
+    <div class="col">
+      <h4 class="mb-4">Agrega tu comentario</h4>
+      <div class="row" id="agrega_comentario">
+        <p class="mb-1">Tu opinión:</p>
+        <textarea id='comentario' class="mb-3 col-md-6 col-lg-4" cols="30" rows="3"></textarea>
+        <p class="mb-1">Tu puntuación:</p>
+        <select id="puntos" class="col-md-4 col-lg-2">
+          <option selected disabled class="text-center">---- elije una puntuación ----</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="btn btn-primary mt-3">Enviar</div>
+    </div>
+    </div>
     `
     contenedor.innerHTML = content;
 } 
