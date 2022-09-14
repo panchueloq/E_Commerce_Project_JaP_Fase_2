@@ -84,7 +84,6 @@ function add_to_html(data){
           <option>5</option>
         </select>
       </div>
-      <div class="btn btn-primary mt-3">Enviar</div>
     </div>
     </div>
     `
@@ -140,4 +139,61 @@ function fillReviews(comment_data){
     });
     reviews.innerHTML = review_content;
 }
+
+// Adding comments
+
+let content = '';
+const boton = document.getElementById('btn');
+
+boton.addEventListener('click', ()=>{
+  const user = localStorage.getItem('personal_email');
+  const user_comment = document.getElementById('comentario');
+  const user_points = document.getElementById('puntos');
+  const d = new Date();
+  const date = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
+
+  if (user_points.value != '---- elije una puntuación ----'){
+    const star_array = ['','','','',''];
+    star_array.forEach((star, idx) => {
+      if (user_points.value > idx){
+        star_array[idx] = 'checked';
+      }
+    });
+    
+    content = `
+    <div class="card mb-2 shadow">
+    <div class="row justify-content-between">
+      <div class="col-md-6">
+        <p><b>${user}</b> - ${date}</p>
+      </div>
+      <div class="col-md-4 text-md-end mb-3">
+        <div class="star">
+            <span class="fa fa-star ${star_array[0]}"></span>
+            <span class="fa fa-star ${star_array[1]}"></span>
+            <span class="fa fa-star ${star_array[2]}"></span>
+            <span class="fa fa-star ${star_array[3]}"></span>
+            <span class="fa fa-star ${star_array[4]}"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <p>${user_comment.value}</p>
+    </div>
+    </div>`
+    
+    
+    document.getElementById("comentarios").innerHTML += content;
+  
+    user_comment.value = '';
+    user_points.value = '---- elije una puntuación ----';
+
+
+  }
+  else{
+    alert('Debe ingresar una puntuación');
+  }
+
+})
+
+
 
