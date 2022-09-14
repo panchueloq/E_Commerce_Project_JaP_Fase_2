@@ -89,7 +89,15 @@ function fillReviews(comment_data){
     let reviews = document.getElementById("comentarios");
     let review_content = '';
     comment_data.forEach(review => {
-        review_content +=`
+      
+      const star_array = ['','','','',''];
+      star_array.forEach((star, idx) => {
+        if (review.score > idx){
+          star_array[idx] = 'checked';
+        }
+      });
+      
+      review_content +=`
         <div class="card mb-2 shadow">
         <div class="row justify-content-between">
           <div class="col-md-6">
@@ -97,11 +105,11 @@ function fillReviews(comment_data){
           </div>
           <div class="col-md-4 text-md-end mb-3">
             <div class="star">
-                <span class="rating-item fa fa-star"></span>
-                <span class="rating-item fa fa-star"></span>
-                <span class="rating-item fa fa-star"></span>
-                <span class="rating-item fa fa-star"></span>
-                <span class="rating-item fa fa-star"></span>
+                <span class="fa fa-star ${star_array[0]}"></span>
+                <span class="fa fa-star ${star_array[1]}"></span>
+                <span class="fa fa-star ${star_array[2]}"></span>
+                <span class="fa fa-star ${star_array[3]}"></span>
+                <span class="fa fa-star ${star_array[4]}"></span>
             </div>
           </div>
         </div>
@@ -112,8 +120,4 @@ function fillReviews(comment_data){
     });
     reviews.innerHTML = review_content;
 }
-
-// function to color stars based on rating
-// function colorStars()
-
 
