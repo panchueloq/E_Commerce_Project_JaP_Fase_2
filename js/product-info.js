@@ -150,7 +150,8 @@ boton.addEventListener('click', ()=>{
   const user_comment = document.getElementById('comentario');
   const user_points = document.getElementById('puntos');
   const d = new Date();
-  const date = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
+  const date = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
+  console.log(d.getDate())
 
   if (user_points.value != '---- elije una puntuación ----'){
     const star_array = ['','','','',''];
