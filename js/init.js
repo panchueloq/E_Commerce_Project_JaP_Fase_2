@@ -41,6 +41,9 @@ let getJSONData = function(url){
 }
 
 
+
+// Navigation Bar
+
 var personal_email = localStorage.getItem('personal_email')
 
 document.getElementById('the_nav_bar').innerHTML = `
@@ -61,8 +64,16 @@ document.getElementById('the_nav_bar').innerHTML = `
         <li class="nav-item">
           <a class="nav-link" href="sell.html">Vender</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="my-profile.html">${personal_email}</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdow-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            ${personal_email}
+            <i class="bi bi-caret-down-fill"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" href="cart.html">Mi Carrito</a></li>
+            <li><a class="dropdown-item" href="my-profile.html">Mi Perfil</a></li>
+            <li><a class="dropdown-item" href="index.html" onclick="localStorage.clear()">Cerrar Sesión</a></li>
+          </ul>
         </li>
       </ul>
     </div>
