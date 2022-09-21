@@ -58,10 +58,9 @@ function add_to_html(data){
       </div>
     </div>
     <div class="col-md-6">
-      <h4>Imágenes</h4>
         
       <div class="col">
-        <div id="carruselito" class="carousel slide carousel-dark" data-bs-ride="carousel">
+        <div id="carruselito" class="carousel slide carousel-dark shadow" data-bs-ride="carousel">
           <div class="carousel-indicators" id="button_part">
             <button type="button" data-bs-target="#carruselito" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           </div>
