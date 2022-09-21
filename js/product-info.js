@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', async function(){
     add_to_html(data);
     fillImages(data);
     fillReviews(comment_data);
+    make_button_work();
+    fillRelated(data);
 })
 
 // function to add html code
@@ -75,7 +77,7 @@ function add_to_html(data){
         <p class="mb-1">Tu opinión:</p>
         <textarea id='comentario' class="mb-3 col-md-6 col-lg-4" cols="30" rows="3"></textarea>
         <p class="mb-1">Tu puntuación:</p>
-        <select id="puntos" class="col-md-4 col-lg-2">
+        <select id="puntos" class="col-md-4 col-lg-3">
           <option selected disabled class="text-center">---- elije una puntuación ----</option>
           <option>1</option>
           <option>2</option>
@@ -83,6 +85,17 @@ function add_to_html(data){
           <option>4</option>
           <option>5</option>
         </select>
+      </div>
+    </div>
+    </div>
+    <div class="row-cols-10 m-0 px-4 mb-3">
+      <div id='btn' class="btn btn-primary mt-3">Enviar</div>
+    </div>
+    <hr>
+    <div class="row m-0 px-4">
+    <div class="col">
+      <h4 class="my-4">Productos relacionados</h4>
+      <div class="row" id="related">
       </div>
     </div>
     </div>
@@ -102,6 +115,29 @@ function fillImages(data){
     });
     imagenes.innerHTML = image_content;
 }
+
+// function to add related products
+function fillRelated(data){
+  let related_prods = document.getElementById("related")
+  let related_content = '';
+  (data.relatedProducts).forEach(element => {
+      related_content += `
+      <div class="related_item col-sm-12 col-md-6 col-lg-3 p-2" style="min-width: 300px;" onclick="{guardarIdentificador(${element.id})}">
+          <img class="img-thumbnail shadow" src="${element.image}" alt="">
+          <p class="px-2 pt-1"><b>${element.name}</b></p>
+      </div>`
+  });
+  related_prods.innerHTML = related_content;
+}
+
+// Function to save product identifier
+function guardarIdentificador(id){
+  localStorage.setItem('id', id);
+  window.location = "product-info.html";
+}
+
+
+
 
 // function to add reviews
 function fillReviews(comment_data){
@@ -142,59 +178,63 @@ function fillReviews(comment_data){
 
 // Adding comments
 
-let content = '';
-const boton = document.getElementById('btn');
+function make_button_work(){
 
-boton.addEventListener('click', ()=>{
-  const user = localStorage.getItem('personal_email');
-  const user_comment = document.getElementById('comentario');
-  const user_points = document.getElementById('puntos');
-  const d = new Date();
-  const date = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
-  console.log(d.getDate())
-
-  if (user_points.value != '---- elije una puntuación ----'){
-    const star_array = ['','','','',''];
-    star_array.forEach((star, idx) => {
-      if (user_points.value > idx){
-        star_array[idx] = 'checked';
-      }
-    });
-    
-    content = `
-    <div class="card mb-2 shadow">
-    <div class="row justify-content-between">
-      <div class="col-md-6">
-        <p><b>${user}</b> - ${date}</p>
-      </div>
-      <div class="col-md-4 text-md-end mb-3">
-        <div class="star">
-            <span class="fa fa-star ${star_array[0]}"></span>
-            <span class="fa fa-star ${star_array[1]}"></span>
-            <span class="fa fa-star ${star_array[2]}"></span>
-            <span class="fa fa-star ${star_array[3]}"></span>
-            <span class="fa fa-star ${star_array[4]}"></span>
+  let content = '';
+  const boton = document.getElementById('btn');
+  
+  boton.addEventListener('click', ()=>{
+    const user = localStorage.getItem('personal_email');
+    const user_comment = document.getElementById('comentario');
+    const user_points = document.getElementById('puntos');
+    const d = new Date();
+    const date = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
+  
+    if (user_points.value != '---- elije una puntuación ----'){
+      const star_array = ['','','','',''];
+      star_array.forEach((star, idx) => {
+        if (user_points.value > idx){
+          star_array[idx] = 'checked';
+        }
+      });
+      
+      content = `
+      <div class="card mb-2 shadow">
+      <div class="row justify-content-between">
+        <div class="col-md-6">
+          <p><b>${user}</b> - ${date}</p>
+        </div>
+        <div class="col-md-4 text-md-end mb-3">
+          <div class="star">
+              <span class="fa fa-star ${star_array[0]}"></span>
+              <span class="fa fa-star ${star_array[1]}"></span>
+              <span class="fa fa-star ${star_array[2]}"></span>
+              <span class="fa fa-star ${star_array[3]}"></span>
+              <span class="fa fa-star ${star_array[4]}"></span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <p>${user_comment.value}</p>
-    </div>
-    </div>`
+      <div class="row">
+        <p>${user_comment.value}</p>
+      </div>
+      </div>`
+      
+      
+      document.getElementById("comentarios").innerHTML += content;
     
-    
-    document.getElementById("comentarios").innerHTML += content;
+      user_comment.value = '';
+      user_points.value = '---- elije una puntuación ----';
   
-    user_comment.value = '';
-    user_points.value = '---- elije una puntuación ----';
+  
+    }
+    else{
+      alert('Debe ingresar una puntuación');
+    }
+  
+  })
 
+}
 
-  }
-  else{
-    alert('Debe ingresar una puntuación');
-  }
-
-})
 
 
 
