@@ -69,7 +69,7 @@ document.getElementById('the_nav_bar').innerHTML = `
             ${personal_email}
             <i class="bi bi-caret-down-fill"></i>
           </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+          <ul class="dropdown-menu dropdown-menu-dark bg-dark border-0" aria-labelledby="navbarDarkDropdownMenuLink">
             <li><a class="dropdown-item" href="cart.html">Mi Carrito</a></li>
             <li><a class="dropdown-item" href="my-profile.html">Mi Perfil</a></li>
             <li><a class="dropdown-item" href="index.html" onclick="localStorage.clear()">Cerrar Sesión</a></li>

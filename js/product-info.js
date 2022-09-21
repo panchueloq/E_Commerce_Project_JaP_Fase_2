@@ -59,7 +59,25 @@ function add_to_html(data){
     </div>
     <div class="col-md-6">
       <h4>Imágenes</h4>
-        <div class="row" id="imagenes"></div>
+        
+      <div class="col">
+        <div id="carruselito" class="carousel slide carousel-dark" data-bs-ride="carousel">
+          <div class="carousel-indicators" id="button_part">
+            <button type="button" data-bs-target="#carruselito" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          </div>
+          <div class="carousel-inner" id="imagenes">
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carruselito" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carruselito" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
     </div>
     </div>
     <hr>
@@ -107,13 +125,26 @@ function add_to_html(data){
 function fillImages(data){
     let imagenes = document.getElementById("imagenes");
     let image_content = '';
-    (data.images).forEach(element => {
-        image_content += `
-        <div class="col-sm-12 col-md-6 col-lg-3 p-2" style="min-width: 300px;">
-            <img class="img-thumbnail shadow" src="${element}" alt="">
+    let button_part = document.getElementById("button_part");
+    var button_content = '';
+    (data.images).forEach((element,idx) => {
+      
+      var is_active = '';
+      if(idx === 0) {is_active = 'active';}
+      
+      image_content += `
+        <div class="carousel-item ${is_active}">
+          <img src="${element}" class="d-block w-100 img-thumbnail shadow">
         </div>`
+
+        if (idx > 0){
+          button_content += `
+          <button type="button" data-bs-target="#carruselito" data-bs-slide-to="${idx}" aria-label="Slide ${idx+1}"></button>
+          `
+        }
     });
     imagenes.innerHTML = image_content;
+    button_part.innerHTML += button_content;
 }
 
 // function to add related products
