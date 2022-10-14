@@ -14,13 +14,47 @@
 
 <body>
   <div id="the_nav_bar"></div>
-  <main>
+  
+  <main class="pb-5">
+    <div class="text-center p-4">
+      <h2>Tu Carrito de Compras</h2>
+    </div>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <h4>Artículos a comprar</h4>
+      <div class="row mt-4">
+        <div class="col-2 d-none d-md-block"></div>
+        <div class="col-3 col-md-3"><b>Nombre</b></div>
+        <div class="col-3 col-md-2"><b>Costo</b></div>
+        <div class="col-3 col-md-2"><b>Cantidad</b></div>
+        <div class="col-3 col-md-3"><b>Subtotal</b></div>
+      </div>
+      <hr class="p-0 m-0 mt-1">
+      <div id="cart_items">
+        <div class="row mt-2 align-items-center">
+          <div class="col-2 d-none d-md-block text-center">
+            <img src="https://placekitten.com/60/60" alt="">
+          </div>
+          <div class="col-3 col-md-3">Peugeot 208</div>
+          <div class="col-3 col-md-2">USD 25000</div>
+          <div class="col-3 col-md-2"><input type="number" min ="1" style="max-width: 70px;"></div>
+          <div class="col-3 col-md-3"><b>USD 25000</b></div>
+        </div>
+        <hr class="p-0 m-0 mt-1">
+        <div class="row mt-2 align-items-center">
+          <div class="col-2 d-none d-md-block text-center">
+            <img src="https://placekitten.com/60/60" alt="">
+          </div>
+          <div class="col-3 col-md-3">Peugeot 208</div>
+          <div class="col-3 col-md-2">USD 25000</div>
+          <div class="col-3 col-md-2"><input type="number" min ="1" style="max-width: 70px;"></div>
+          <div class="col-3 col-md-3"><b>USD 25000</b></div>
+        </div>
+        <hr class="p-0 m-0 mt-1">
       </div>
     </div>
   </main>
+
+
   <footer class="text-muted">
     <div class="container">
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> - 2022</p>
