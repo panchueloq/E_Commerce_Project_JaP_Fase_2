@@ -69,8 +69,7 @@ function check_positive_input(index){
 }
 
 // function to change count depending on "Cantidad" input
-function change_count(index){
-    
+function change_count(index){ 
     let item = document.getElementById(`${index}`);
     if(item.querySelector('.input_div > input').value > 0){
         cart_items = cart_items.map(object => {
@@ -83,27 +82,3 @@ function change_count(index){
         add_from_LS();
     }
 }
-
-
-
-
-
-
-// function that adds up the subtotal by item based on the "Cantidad" input
-// function sub_total(){
-//     const items = document.querySelectorAll('.item_div');
-//     items.forEach(element => {
-//         element.querySelector('.input_div ~ .span_div > b > span').innerHTML = 
-//         element.querySelector('.input_div > input').value * element.querySelector('.cost_div > span').innerHTML
-//     });
-// }
-
-// function that adds the change event listener to the "Cantidad" inputs
-// function add_event_to_inputs(){
-//     const items = document.querySelectorAll('.item_div');
-//     items.forEach(element => {
-//         element.querySelector('.input_div > input').addEventListener('change', ()=>{
-//             sub_total();
-//         })
-//     })
-// }
