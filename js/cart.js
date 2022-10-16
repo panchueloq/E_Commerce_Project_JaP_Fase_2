@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', async function(){
     let data = await getData();
     item_to_local_storage(data);
     add_from_LS();
-    check_positive_input();
 })
 
 let cart_items = [];
