@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async function(){
 })
 
 let cart_items = [];
-
+// function to set item to LS
 function item_to_local_storage(data){
     let item_data = data.articles[0];
     cart_item ={
@@ -31,7 +31,7 @@ function item_to_local_storage(data){
     localStorage.setItem('cart_items_LS', JSON.stringify(cart_items));
 }
 
-// function to add item to cart from LS
+// function to add item to cart HTML from LS
 function add_from_LS(){
     cart_items = JSON.parse(localStorage.getItem('cart_items_LS'));
     const container = document.getElementById('cart_items');
@@ -44,7 +44,7 @@ function add_from_LS(){
             </div>
             <div class="col-3 col-md-3">${item.name}</div>
             <div class="cost_div col-3 col-md-2">${item.currency} <span>${item.unitCost}</span></div>
-            <div class="input_div col-3 col-md-2"><input type="number" min ="1" value="${item.count}" style="max-width: 70px;" onchange="change_count(${item.id}); check_positive_input(${item.id});"></div>
+            <div class="input_div col-3 col-md-2"><input type="number" min ="1" value="${item.count}" style="max-width: 70px;" onchange="check_input(${item.id})"></div>
             <div class="span_div col-3 col-md-3"><b>${item.currency} <span>${item.unitCost*item.count}</span></b></div>
         </div>
         <hr class="p-0 m-0 mt-1">` 
@@ -52,32 +52,20 @@ function add_from_LS(){
     container.innerHTML = content;
 }
 
-// function to check positive value of "Cantidad" input
-function check_positive_input(index){
+// function to modify count value when changing input
+function check_input(index){
     let item = document.getElementById(`${index}`);
     cart_items = cart_items.map(object =>{
         if (object.id === index){
             if(item.querySelector('.input_div > input').value < 1){
                 object.count = 1;
             }
+            else{
+                object.count = item.querySelector('.input_div > input').value; 
+            }
         }
         return object;
     })
     localStorage.setItem('cart_items_LS', JSON.stringify(cart_items));
     add_from_LS();
-}
-
-// function to change count depending on "Cantidad" input
-function change_count(index){ 
-    let item = document.getElementById(`${index}`);
-    if(item.querySelector('.input_div > input').value > 0){
-        cart_items = cart_items.map(object => {
-            if (object.id === index){
-                object.count = item.querySelector('.input_div > input').value;
-            }
-            return object;
-        });
-        localStorage.setItem('cart_items_LS', JSON.stringify(cart_items));
-        add_from_LS();
-    }
 }
