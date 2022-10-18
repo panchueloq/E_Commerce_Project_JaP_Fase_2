@@ -193,3 +193,8 @@ a.custom-card:hover {
   background-color: lightgray;
   cursor: pointer;
 }
+
+.eliminate_cart_item:hover{
+  background-color: black;
+  border-radius: 20%;
+}

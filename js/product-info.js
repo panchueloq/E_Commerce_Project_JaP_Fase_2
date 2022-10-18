@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', async function(){
     fillReviews(comment_data);
     make_button_work();
     fillRelated(data);
+    get_object(data);
 })
 
 // function to add html code
@@ -34,8 +35,9 @@ function add_to_html(data){
     const contenedor = document.getElementById('contenedor');
     let content = '';
     content = `
-    <div class="text-center p-4">
-    <h1 id="name_prod" class="text-start">${data.name}</h1>
+    <div class="row text-center p-4">
+      <h1 id="name_prod" class="col-12 col-md-8 text-start">${data.name}</h1>
+      <div class="col-12 col-md-4 d-flex align-items-center justify-content-end"><button class="btn btn-success" onclick="add_to_cart()"><i class="bi bi-cart-fill"></i> Agregar al Carrito</button></div>
     </div>
     <hr>
     <div class="row m-0 px-4">
@@ -265,6 +267,33 @@ function make_button_work(){
 
 }
 
+// get object from data
+function get_object(data){
+  var item_object = {
+    "id": data.id,
+    "name": data.name,
+    "count": 1,
+    "unitCost": data.cost,
+    "currency": data.currency,
+    "image": data.images[0]
+  }
+  localStorage.setItem('item_object', JSON.stringify(item_object))
+}
 
+// function to add to shopping cart
+function add_to_cart(){
+  item_cart_list = [];
+  let item_object = JSON.parse(localStorage.getItem('item_object'));
+  if(JSON.parse(localStorage.getItem('cart_items_LS')) == null){
+    item_cart_list.push(item_object);
+    localStorage.setItem('cart_items_LS', JSON.stringify(item_cart_list));
+  }
+  else{
+    let item_cart_list = JSON.parse(localStorage.getItem('cart_items_LS'));
+    item_cart_list.push(item_object);
+    localStorage.setItem('cart_items_LS', JSON.stringify(item_cart_list));
+  }
+  alert('Agregado al Carrito')
+}
 
 
