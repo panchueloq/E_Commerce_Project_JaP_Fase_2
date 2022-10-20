@@ -40,7 +40,11 @@ function add_to_html(data){
     content = `
     <div class="row text-center p-4">
       <h1 id="name_prod" class="col-12 col-md-8 text-start">${data.name}</h1>
-      <div class="col-12 col-md-4 d-flex align-items-center justify-content-end"><button class="btn btn-success" onclick="add_to_cart()"><i class="bi bi-cart-fill"></i> Agregar al Carrito</button></div>
+      <div class="col-12 col-md-4 d-flex align-items-center justify-content-end">
+        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" onclick="add_to_cart()">
+          <i class="bi bi-cart-fill"></i> Agregar al Carrito
+        </button>
+      </div>
     </div>
     <hr>
     <div class="row m-0 px-4">
@@ -296,7 +300,6 @@ function add_to_cart(){
     item_cart_list.push(item_object);
     localStorage.setItem('cart_items_LS', JSON.stringify(item_cart_list));
   }
-  alert('Agregado al Carrito')
 }
 
 
