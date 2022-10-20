@@ -175,9 +175,6 @@ function guardarIdentificador(id){
   window.location = "product-info.html";
 }
 
-
-
-
 // function to add reviews
 function fillReviews(comment_data){
     let reviews = document.getElementById("comentarios");

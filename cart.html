@@ -37,22 +37,51 @@
         <div class="form-check">
           <input class="form-check-input" type="radio" name="deliveryoption" id="deliveryoption1" value="option1">
           <label class="form-check-label" for="deliveryoption1">
-            Premium - 2 a 5 días
+            Premium - 2 a 5 días (15% del costo)
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="deliveryoption" id="deliveryoption2" value="option2">
           <label class="form-check-label" for="deliveryoption2">
-            Express - 5 a 8 días
+            Express - 5 a 8 días (7% del costo)
           </label>
         </div>
-        <div class="form-check disabled">
-          <input class="form-check-input" type="radio" name="deliveryoption" id="deliveryoption3" value="option3">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="deliveryoption" id="deliveryoption3" value="option3" checked>
           <label class="form-check-label" for="deliveryoption3">
-            Standard - 12 a 25 días
+            Standard - 12 a 25 días (5% del costo)
           </label>
         </div>
       </form>
+      <h4 class="mt-5">Costos</h4>
+      <div class="card overflow-hidden mt-3">
+        <div class="row mx-0 p-0 py-2 d-flex justify-content-center">
+          <div class="row p-0">
+            <div class="col-6">Costo Productos</div>
+            <div class="col-6 text-end">USD 5000000</div>
+          </div>
+          <div class="row p-0">
+            <div class="col"><small>Suma total del costo de los productos sin considerar el envío</small></div>
+          </div>
+        </div>
+        <hr class="m-0 p-0">
+        <div class="row mx-0 p-0 py-2 d-flex justify-content-center">
+          <div class="row p-0">
+            <div class="col-6">Costo de Envío</div>
+            <div class="col-6 text-end">USD 50000</div>
+          </div>
+          <div class="row p-0">
+            <div class="col"><small>Según el tipo de envío seleccionado</small></div>
+          </div>
+        </div>
+        <hr class="m-0 p-0">
+        <div class="row mx-0 p-0 py-3 d-flex justify-content-center" style="background-color: #E0E0E0;">
+          <div class="row p-0">
+            <div class="col-6">Total a Pagar</div>
+            <div class="col-6 text-end"><b>USD 5050000</b></div>
+          </div>
+        </div>
+      </div>
       <h4 class="mt-5">Dirección de envío</h4>
       <form>
         <div class="row">
@@ -70,8 +99,27 @@
             <label for="street_corner">Esquina</label>
             <input type="text" class="form-control" id="street_corner">
           </div>
+          <div class="form-group col-md-4 mt-2">
+            <label for="street_num">Info. adicional</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-8 mt-2">
+            <label for="street_corner">Departamento</label>
+            <input type="text" class="form-control" id="departamento">
+          </div>
+          <div class="form-group col-md-4 mt-2">
+            <label for="street_num">Código postal</label>
+            <input type="text" class="form-control" id="postal_code">
+          </div>
         </div>
       </form>
+      <h4 class="mt-5">Forma de Pago</h4>
+      <p id="payment">No ha seleccionado una forma de pago. <span><a href="">Seleccionar o Cambiar</a></span></p> 
+    </div>
+    <div class="d-flex container mt-5">
+      <button class="btn btn-success flex-fill">Finalizar Compra</button>
     </div>
   </main>
 
