@@ -28,6 +28,9 @@ document.addEventListener('DOMContentLoaded', async function(){
     make_button_work();
     fillRelated(data);
     get_object(data);
+    setInterval(function(){
+      document.getElementById('click_next').click();
+    }, 3000);
 })
 
 // function to add html code
@@ -72,7 +75,7 @@ function add_to_html(data){
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carruselito" data-bs-slide="next">
+          <button id="click_next" class="carousel-control-next" type="button" data-bs-target="#carruselito" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
@@ -135,7 +138,7 @@ function fillImages(data){
       
       image_content += `
         <div class="carousel-item ${is_active}">
-          <img src="${element}" class="d-block w-100 img-thumbnail shadow">
+          <img src="${element}" class="w-100 img-thumbnail shadow">
         </div>`
 
         if (idx > 0){
