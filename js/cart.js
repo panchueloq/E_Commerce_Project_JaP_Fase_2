@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', async function(){
         item_to_local_storage(data);
     }
     add_from_LS();
+    calculate_costs();
 })
 
 let cart_items = [];
@@ -72,6 +73,7 @@ function check_input(index){
     })
     localStorage.setItem('cart_items_LS', JSON.stringify(cart_items));
     add_from_LS();
+    calculate_costs();
 }
 
 // function to erase items
@@ -79,5 +81,40 @@ function erase_item(index){
     cart_items = cart_items.filter(item => item.id != index);
     localStorage.setItem('cart_items_LS', JSON.stringify(cart_items));
     add_from_LS();
-    console.log("erased!")
+    calculate_costs();
+}
+
+// function to calculate costs
+function calculate_costs(){
+    let storage = JSON.parse(localStorage.getItem('cart_items_LS'));
+    let cost = 0;
+    storage.forEach(item => {
+        if(item.currency == 'UYU'){
+            cost += (item.unitCost*item.count)/40;
+        }
+        else{
+            cost += item.unitCost*item.count;
+        }
+    });
+    let prod_cost = document.getElementById("prod_cost");
+    let delivery_cost = document.getElementById("delivery_cost");
+    let total_cost = document.getElementById('total_cost');
+
+    let deli_1 = document.getElementById('deliveryoption1');
+    let deli_2 = document.getElementById('deliveryoption2');
+    let deli_3 = document.getElementById('deliveryoption3');
+    
+    prod_cost.innerHTML = cost.toFixed(0);
+
+    if(deli_1.checked){
+        delivery_cost.innerHTML = (prod_cost.innerHTML*0.15).toFixed(0);
+    }
+    else if(deli_2.checked){
+        delivery_cost.innerHTML = (prod_cost.innerHTML*0.07).toFixed(0);
+    }
+    else if(deli_3.checked){
+        delivery_cost.innerHTML = (prod_cost.innerHTML*0.05).toFixed(0);
+    }
+
+    total_cost.innerHTML = parseInt(prod_cost.innerHTML) + parseInt(delivery_cost.innerHTML);
 }
