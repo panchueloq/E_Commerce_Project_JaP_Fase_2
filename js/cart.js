@@ -1,39 +1,14 @@
-// async function to get data
-async function getData(){
-    let link = `https://japceibal.github.io/emercado-api/user_cart/25801.json`
-    let respuesta = await fetch(link);
-    if (respuesta.ok){
-        let data = await respuesta.json();
-        return data;
-    }
-}
-
-// async function to work with data
-document.addEventListener('DOMContentLoaded', async function(){
-    let storage = JSON.parse(localStorage.getItem('cart_items_LS'));
-    if (storage == '' || storage == null){
-        let data = await getData();
-        item_to_local_storage(data);
+document.addEventListener('DOMContentLoaded', function(){
+    var LS = localStorage.getItem('cart_items_LS')
+    if(LS == null || LS == '' || LS == undefined){
+        let emptyModal = new bootstrap.Modal(document.getElementById('emptyModal'), {keyboard: false});
+        emptyModal.show();
     }
     add_from_LS();
     calculate_costs();
 })
 
 let cart_items = [];
-// function to set item to LS
-function item_to_local_storage(data){
-    let item_data = data.articles[0];
-    cart_item ={
-        "id": item_data.id,
-        "name": item_data.name,
-        "count": item_data.count,
-        "unitCost": item_data.unitCost,
-        "currency": item_data.currency,
-        "image": item_data.image
-    }
-    cart_items.push(cart_item);
-    localStorage.setItem('cart_items_LS', JSON.stringify(cart_items));
-}
 
 // function to add item to cart HTML from LS
 function add_from_LS(){
@@ -143,8 +118,14 @@ function calculate_costs(){
             event.preventDefault()
             event.stopPropagation()
           }
-  
+          else{
+            event.preventDefault()
+            event.stopPropagation()
+            verify_purchase()
+          }
+
           form.classList.add('was-validated')
+
         }, false)
       })
   })()
@@ -217,6 +198,68 @@ close_modal.addEventListener('click', ()=>{
     }
 })
 
+// fucntion to verify everything before finalizing purchase
+function verify_purchase(){
+    let verification_modal_body = document.getElementById('verification_modal_body');
+    let cart_headers = document.getElementById('cart_headers');
+    let verificationModal = new bootstrap.Modal(document.getElementById('verificationModal'), {keyboard: false});
+    let verify_html = "";
+
+    verify_html += cart_headers.innerHTML;
+
+    cart_items = JSON.parse(localStorage.getItem('cart_items_LS'));
+    cart_items.forEach(item => {
+        verify_html += `
+        <div class="item_div row mt-2 align-items-center d-flex justify-content-around" id="${item.id}">
+            <div class="col-md-2 d-none d-md-block text-center">
+                <img src="${item.image}" style="max-width: 60px; max-height: 60px;">
+            </div>
+            <div class="col-2 col-md-3">${item.name}</div>
+            <div class="cost_div col-2">${item.currency} <span>${item.unitCost}</span></div>
+            <div class="col-2">${item.count}</div>
+            <div class="span_div col-2"><b>${item.currency} <span>${item.unitCost*item.count}</span></b></div>
+            <div class="col-1"></div>
+        </div>
+        <hr class="p-0 m-0 mt-1">` 
+    });
+
+    let delivery = document.getElementsByName('deliveryoption')
+    let delivery_selected = ""
+    delivery.forEach(opt =>{
+        if(opt.checked){
+            delivery_selected = document.querySelector(`#${opt.id} + label`).innerText
+        }
+    })
+
+    verify_html += `<p class="mt-4"><b>Tipo de envío:</b> <span>${delivery_selected}</span></p>`;
+
+    let the_cost_card = document.getElementById('the_cost_card');
+    verify_html += the_cost_card.innerHTML;
 
 
+    let street = document.getElementById('street');
+    let street_num = document.getElementById('street_num');
+    let street_corner = document.getElementById('street_corner');
+    let departamento = document.getElementById('departamento');
+    let postal_code = document.getElementById('postal_code');
+    let add_info = document.getElementById('add_info');
 
+
+    verify_html += `<p class="mt-4"><b>Entregar en:</b> <span>${street.value} ${street_num.value}, esquina ${street_corner.value}. ${departamento.value}. CP: ${postal_code.value}. Additional info: ${add_info.value}</span></p>`
+
+
+    verification_modal_body.innerHTML = verify_html;
+    verificationModal.show();
+}
+
+// final purchase confirmation button
+const success_purchase = document.getElementById('success_purchase');
+success_purchase.addEventListener('click', ()=>{
+    localStorage.removeItem('cart_items_LS');
+    window.location = 'purchase-complete.html';
+})
+
+const empty_cart_btn = document.getElementById('empty_cart_btn');
+empty_cart_btn.addEventListener('click', ()=>{
+    window.location = 'home.html';
+})

@@ -21,15 +21,17 @@
     </div>
     <div class="container">
       <h4>Artículos a comprar</h4>
-      <div class="row mt-4 d-flex justify-content-around">
-        <div class="col-md-2 d-none d-md-block"></div>
-        <div class="col-2 col-md-3"><b>Nombre</b></div>
-        <div class="col-2"><b>Costo</b></div>
-        <div class="col-2"><b>Cantidad</b></div>
-        <div class="col-2"><b>Subtotal</b></div>
-        <div class="col-1"></div>
+      <div id="cart_headers">
+        <div class="row mt-4 d-flex justify-content-around">
+          <div class="col-md-2 d-none d-md-block"></div>
+          <div class="col-2 col-md-3"><b>Nombre</b></div>
+          <div class="col-2"><b>Costo</b></div>
+          <div class="col-2"><b>Cantidad</b></div>
+          <div class="col-2"><b>Subtotal</b></div>
+          <div class="col-1"></div>
+        </div>
+        <hr class="p-0 m-0 mt-1">
       </div>
-      <hr class="p-0 m-0 mt-1">
       <div id="cart_items">
       </div>
       <h4 class="mt-5">Tipo de envío</h4>
@@ -54,31 +56,33 @@
         </div>
       </form>
       <h4 class="mt-5">Costos</h4>
-      <div class="card overflow-hidden mt-3" style="border: 2px solid gray;">
-        <div class="row mx-0 p-0 py-2 d-flex justify-content-center">
-          <div class="row p-0">
-            <div class="col-6">Costo Productos</div>
-            <div class="col-6 text-end">USD <span id="prod_cost"></span></div>
+      <div id="the_cost_card">
+        <div class="card overflow-hidden mt-3" style="border: 2px solid gray;">
+          <div class="row mx-0 p-0 py-2 d-flex justify-content-center">
+            <div class="row p-0">
+              <div class="col-6">Costo Productos</div>
+              <div class="col-6 text-end">USD <span id="prod_cost"></span></div>
+            </div>
+            <div class="row p-0">
+              <div class="col"><small>Suma total del costo de los productos sin considerar el envío</small></div>
+            </div>
           </div>
-          <div class="row p-0">
-            <div class="col"><small>Suma total del costo de los productos sin considerar el envío</small></div>
+          <hr class="m-0 p-0">
+          <div class="row mx-0 p-0 py-2 d-flex justify-content-center">
+            <div class="row p-0">
+              <div class="col-6">Costo de Envío</div>
+              <div class="col-6 text-end">USD <span id="delivery_cost"></span></div>
+            </div>
+            <div class="row p-0">
+              <div class="col"><small>Según el tipo de envío seleccionado</small></div>
+            </div>
           </div>
-        </div>
-        <hr class="m-0 p-0">
-        <div class="row mx-0 p-0 py-2 d-flex justify-content-center">
-          <div class="row p-0">
-            <div class="col-6">Costo de Envío</div>
-            <div class="col-6 text-end">USD <span id="delivery_cost"></span></div>
-          </div>
-          <div class="row p-0">
-            <div class="col"><small>Según el tipo de envío seleccionado</small></div>
-          </div>
-        </div>
-        <hr class="m-0 p-0">
-        <div class="row mx-0 p-0 py-3 d-flex justify-content-center" style="background-color: #E0E0E0;">
-          <div class="row p-0">
-            <div class="col-6">Total a Pagar</div>
-            <div class="col-6 text-end"><b>USD <span id="total_cost"></span></b></div>
+          <hr class="m-0 p-0">
+          <div class="row mx-0 p-0 py-3 d-flex justify-content-center" style="background-color: #E0E0E0;">
+            <div class="row p-0">
+              <div class="col-6">Total a Pagar</div>
+              <div class="col-6 text-end"><b>USD <span id="total_cost"></span></b></div>
+            </div>
           </div>
         </div>
       </div>
@@ -110,7 +114,7 @@
           </div>
           <div class="col-md-4 mt-2">
             <label for="street_num">Info. adicional</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" id="add_info">
           </div>
         </div>
         <div class="row">
@@ -140,7 +144,7 @@
         <button id="purchase" class="btn btn-success flex-fill" type="submit">Finalizar Compra</button>
       </div>
 
-      <!-- Modal -->
+      <!-- Payment Modal -->
       <div class="modal fade" id="modalPago" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalPagoLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -194,6 +198,40 @@
 
     </form>
   </main>
+
+  <!-- Verification Modal -->
+  <div class="modal fade" id="verificationModal" tabindex="-1" aria-labelledby="verificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="verificationModalLabel">Verifica tu compra para finalizar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-0" id="verification_modal_body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+          <button type="button" class="btn btn-primary" id="success_purchase"><i class="bi bi-check-circle-fill"></i> Comprar Ahora!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty Cart Modal -->
+  <div class="modal fade" id="emptyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="emptyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="emptyModalLabel">El carrito está vacío!</h5>
+        </div>
+        <div class="modal-body py-0" id="empty_modal_body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="empty_cart_btn">Volver a la página de inicio</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <footer class="text-muted">
