@@ -119,10 +119,104 @@ function calculate_costs(){
     total_cost.innerHTML = parseInt(prod_cost.innerHTML) + parseInt(delivery_cost.innerHTML);
 }
 
-// to select payment method
-const payment_button = document.getElementById('change_payment');
+// // to select payment method
+// const payment_button = document.getElementById('change_payment');
 
-payment_button.addEventListener('click', (event)=>{
-    event.preventDefault();
-    
+// payment_button.addEventListener('click', (event)=>{
+//     event.preventDefault();
+// })
+
+
+// Bootstrap validation script
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+
+
+// Control the payment options
+const payment = document.getElementsByName('paymentoption');
+const card_number = document.getElementById('card_number');
+const card_exp = document.getElementById('card_exp');
+const card_cvv = document.getElementById('card_cvv');
+const bank_bank = document.getElementById('bank_bank');
+const bank_num = document.getElementById('bank_num');
+const pay_text = document.getElementById('payment_method');
+const pay_link = document.getElementById('change_payment');
+
+// Enable of disable payment options
+payment.forEach(pay_opt => {
+    pay_opt.addEventListener('change', ()=>{
+        if(payment[0].checked){
+            card_number.disabled = false;
+            card_exp.disabled = false;
+            card_cvv.disabled = false;
+            bank_bank.disabled = true;
+            bank_num.disabled = true;
+            pay_text.innerText = 'Targeta de crédito';
+        }
+        else if(payment[1].checked){
+            card_number.disabled = true;
+            card_exp.disabled = true;
+            card_cvv.disabled = true;
+            bank_bank.disabled = false;
+            bank_num.disabled = false;
+            pay_text.innerText = 'Transferencia bancaria';
+        }
+    })
+});
+
+// Validation feedback for payment form
+const close_modal = document.getElementById('close_modal');
+const alert_card = document.getElementById('alert_card');
+const alert_bank = document.getElementById('alert_bank');
+const alert_pago = document.getElementById('alert_pago');
+
+close_modal.addEventListener('click', ()=>{
+    if(payment[0].checked){
+        alert_bank.innerText = '';
+        if(card_number.value == '' || card_exp.value == '' || card_cvv.value == ''){
+            alert_card.innerText = 'Por favor ingrese todos los datos de su tarjeta';
+            alert_pago.innerText = 'Por favor complete el formulario de pago';
+            pay_link.classList.add('text-danger');
+        }
+        else{
+            alert_card.innerText = '';
+            alert_pago.innerText = '';
+            pay_link.classList.remove('text-danger');
+        }
+    }
+    if(payment[1].checked){
+        alert_card.innerText = '';
+        if(bank_bank.value == '' || bank_num.value == ''){
+            alert_bank.innerText = 'Por favor ingrese todos los datos de su cuenta bancaria';
+            alert_pago.innerText = 'Por favor complete el formulario de pago';
+            pay_link.classList.add('text-danger');
+        }
+        else{
+            alert_bank.innerText = '';
+            alert_pago.innerText = '';
+            pay_link.classList.remove('text-danger');
+        }
+    }
 })
+
+
+
+
