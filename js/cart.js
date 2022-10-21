@@ -1,9 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-    var LS = localStorage.getItem('cart_items_LS')
-    if(LS == null || LS == '' || LS == undefined){
-        let emptyModal = new bootstrap.Modal(document.getElementById('emptyModal'), {keyboard: false});
-        emptyModal.show();
-    }
+    check_empty_cart();
     add_from_LS();
     calculate_costs();
 })
@@ -57,6 +53,7 @@ function erase_item(index){
     localStorage.setItem('cart_items_LS', JSON.stringify(cart_items));
     add_from_LS();
     calculate_costs();
+    check_empty_cart();
 }
 
 // function to calculate costs
@@ -263,3 +260,12 @@ const empty_cart_btn = document.getElementById('empty_cart_btn');
 empty_cart_btn.addEventListener('click', ()=>{
     window.location = 'home.html';
 })
+
+// fucntion to check if cart is empty
+function check_empty_cart(){
+    var LS = localStorage.getItem('cart_items_LS')
+    if(LS == null || LS == '' || LS == undefined || LS == '[]'){
+        let emptyModal = new bootstrap.Modal(document.getElementById('emptyModal'), {keyboard: false});
+        emptyModal.show();
+    }
+}
