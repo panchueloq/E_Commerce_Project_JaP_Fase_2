@@ -91,13 +91,6 @@ function calculate_costs(){
     total_cost.innerHTML = parseInt(prod_cost.innerHTML) + parseInt(delivery_cost.innerHTML);
 }
 
-// // to select payment method
-// const payment_button = document.getElementById('change_payment');
-
-// payment_button.addEventListener('click', (event)=>{
-//     event.preventDefault();
-// })
-
 
 // Bootstrap validation script
 // Example starter JavaScript for disabling form submissions if there are invalid fields
