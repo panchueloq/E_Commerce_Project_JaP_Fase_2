@@ -85,7 +85,7 @@
             </div>
             <div class="row">
               <div class="mt-5 col-md-4 col-sm-6">
-                <button class="btn btn-primary" type="submit">Guardar Cambios</button>
+                <button id="btn_save_changes" class="btn btn-primary" type="submit">Guardar Cambios</button>
               </div>
             </div>
           </form>
@@ -93,6 +93,22 @@
       </div>
     </div>
   </main>
+
+  <!-- Not Logged In Modal -->
+  <div class="modal fade" id="notLoggedModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="notLoggedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="notLoggedModalLabel">Debe iniciar sesión!</h5>
+        </div>
+        <div class="modal-body py-0" id="not_logged_modal_body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="not_logged_btn">Volver al inicio</button>
+        </div>
+      </div>
+    </div>
+  </div>
   
   <footer class="text-muted">
     <div class="container">
