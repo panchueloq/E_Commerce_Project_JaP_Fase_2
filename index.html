@@ -39,18 +39,20 @@
             <div class="card shadow-2-strong" style="border-radius: 1rem;">
               <div class="card-body py-5 text-center">
 
-                <form>
+                <form class="needs-validation" novalidate>
                   
                   <!-- Email Input -->
                   <div class="form-outline mb-4">
-                    <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Email"/>
+                    <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Email" required>
+                    <div class="invalid-feedback text-start">Por favor ingrese su email.</div>
                     <p class="d-flex justify-content-start" style="color: red;"></p>
                   </div>
           
 
                   <!-- Password Input -->
                   <div class="form-outline mb-4">
-                    <input type="password" id="password" name="contraseña" class="form-control form-control-lg" placeholder="Contraseña"/>
+                    <input type="password" id="password" name="contraseña" class="form-control form-control-lg" placeholder="Contraseña" required>
+                    <div class="invalid-feedback text-start">Por favor ingrese su contraseña.</div>
                     <p class="d-flex justify-content-start" style="color: red;"></p>
                   </div>
 
