@@ -72,7 +72,7 @@ document.getElementById('the_nav_bar').innerHTML = `
           <ul class="dropdown-menu dropdown-menu-dark bg-dark border-0" aria-labelledby="navbarDarkDropdownMenuLink">
             <li><a class="dropdown-item" href="cart.html">Mi Carrito</a></li>
             <li><a class="dropdown-item" href="my-profile.html">Mi Perfil</a></li>
-            <li><a class="dropdown-item" href="index.html" onclick="localStorage.clear()">Cerrar Sesión</a></li>
+            <li><a class="dropdown-item" href="index.html" onclick="localStorage.removeItem('personal_email')">Cerrar Sesión</a></li>
           </ul>
         </li>
       </ul>
