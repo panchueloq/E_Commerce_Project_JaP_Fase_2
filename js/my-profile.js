@@ -40,8 +40,6 @@ image_input.addEventListener('change', ()=>{
     display_image.classList.remove('d-none');
 })
 
-let email = localStorage.getItem('personal_email');
-
 // CHECK IF LOGGED IN
 if (!personal_email){
     let notLoggedModal = new bootstrap.Modal(document.getElementById('notLoggedModal'), {keyboard: false});
@@ -117,33 +115,3 @@ function guardarCambios(){
 
     window.location = 'my-profile.html';
 }
-
-
-
-
-// // TEST PROFILES
-// if(localStorage.getItem('profiles') === '[]'){
-//     let test_profile = {
-//         email: 'juan@mail.com',
-//         f_name: 'Juan ',
-//         s_name: 'Francisco',
-//         l_name: 'Quagliotti',
-//         sl_name: 'Alori',
-//         phone: '123456',
-//         uploaded_image: ''
-//     }
-//     let test_profile_2 = {
-//         email: 'pepe@mail.com',
-//         f_name: '',
-//         s_name: '',
-//         l_name: '',
-//         sl_name: '',
-//         phone: '',
-//         uploaded_image: ''
-//     }
-
-//     profiles.push(test_profile);
-//     profiles.push(test_profile_2);
-
-//     localStorage.setItem('profiles', JSON.stringify(profiles));    
-// }
